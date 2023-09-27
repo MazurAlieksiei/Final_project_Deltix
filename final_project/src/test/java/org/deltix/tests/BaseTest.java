@@ -4,6 +4,7 @@ import org.deltix.utility.Browser;
 import org.deltix.utility.DeltixApi;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,6 +20,11 @@ public class BaseTest {
         testProperties = new Properties();
         testProperties.load(new FileInputStream("src/test/resources/project.properties"));
         deltixApi = new DeltixApi(testProperties);
+    }
+    
+    @BeforeMethod
+    public void init() {
+        Browser.getDriver().get(testProperties.getProperty("siteUrl"));
     }
 
     @AfterMethod

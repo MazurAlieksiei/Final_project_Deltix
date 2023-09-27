@@ -4,9 +4,7 @@ import io.qameta.allure.Description;
 import org.deltix.enums.Order;
 import org.deltix.models.PostTradeResponse;
 import org.deltix.steps.*;
-import org.deltix.utility.Browser;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -15,11 +13,6 @@ import java.util.List;
 
 public class DeltixTests extends BaseTest {
 
-
-    @BeforeMethod
-    public void init() {
-        Browser.getDriver().get(testProperties.getProperty("siteUrl"));
-    }
 
     @Test(testName = "TC01", description = "Login and check main components")
     @Description("Login and check main components on after login page")
