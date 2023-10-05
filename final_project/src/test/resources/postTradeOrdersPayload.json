@@ -1,0 +1,52 @@
+{
+  "expressions": [
+    "orderType",
+    "count() as all",
+    "countIf(priceImprovementToBenchmarkAmount < 0) as negative",
+    "countIf(priceImprovementToBenchmarkAmount > 0) as positive"
+  ],
+  "groupByExpressions": [
+    "orderType"
+  ],
+  "sorts": [
+    {
+      "$type": "SortDefinition",
+      "fieldName": "orderType",
+      "sortType": "ASC"
+    }
+  ],
+  "filter": {
+    "$type": "AndFilterDefinition",
+    "filters": [
+      {
+        "$type": "SubqueryFilterDefinition",
+        "fieldExpression": "orderInstrument",
+        "filterType": "IN",
+        "filterValue": {
+          "expressions": [
+            "orderInstrument"
+          ],
+          "groupByExpressions": [
+            "orderInstrument"
+          ],
+          "sorts": [
+            {
+              "$type": "SortDefinition",
+              "fieldName": "count()",
+              "sortType": "DESC"
+            }
+          ],
+          "take": 10
+        }
+      },
+      {
+        "$type": "FilterDefinition",
+        "fieldExpression": "dbSequence",
+        "filterType": "LESS_OR_EQUAL",
+        "filterValue": [
+          "608471"
+        ]
+      }
+    ]
+  }
+}
